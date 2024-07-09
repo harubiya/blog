@@ -3,11 +3,12 @@
     <!--common header //-->
     <meta charset="UTF-8">
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
 
     <style>
-      html, body {
-	  font-family: 'Gowun Dodum', sans-serif;
-      }
       .quote {
 	  color: #00002a;
 	  font-size: 0.9em;
@@ -20,15 +21,23 @@
       }
 
       .wrap {
+	  font-family: 'Gowun Dodum', sans-serif;
 	  font-size: 1.2em;
 	  padding: 10px;
-	  spacing: 30px;
 	  word-wrap: break-word; /* 긴 단어를 강제로 줄바꿈 */
 	  word-break: break-all; /* 단어를 잘라서 줄바꿈 */
 	  white-space: pre-wrap; /* 기본 줄바꿈 동작 설정 */
       }
+
+      
+      @media screen and (min-width: 1024px) {
+	  .wrap { width: 70% }
+      }
+      @media screen and (max-width: 1024px) {
+	  .wrap { font-size: 1em; }
+      }
+
     </style>
   </head>
   <body>
     <pre class="wrap">
-

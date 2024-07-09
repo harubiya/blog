@@ -1,0 +1,35 @@
+h1 {
+    font-size: 1.5em;
+}
+table {
+    border-spacing: 10;
+}
+
+a {
+    text-decoration: none;
+}
+
+td {
+    vertical-align: top;
+}
+
+/* 모바일용 스타일 */
+@media screen and (max-width: 1024px) {
+    body {
+	font-size: 1.2em;
+    }
+
+    pre, table {
+	font-size: 2.3em;
+	border-spacing: 20;
+    }
+
+    td.indexcollastmod {
+	font-size: 0.7em;
+    }
+
+    table {
+	width: 100%;
+    }
+
+}
