@@ -1,0 +1,22 @@
+<!--#include virtual='../../header.html'-->
+- 카카오 해시 등록
+- 
+- 2024.03.14
+
+난. upload-key를 생성해가지고 릴리즈 빌드해서 원스토어에 올렷고, 원스토에서 앱키를 관리하게 했어. 이게 끝인 줄 알았는데.
+카카오에 원스토어가 생성하고 관리하고 있는 서명키를 가지고, 해시를 만들어 등록해야 카카오 api를 호출할 수 있다.
+
+1. 원스토에서 서명키 다운로드(deployment_cert.der)
+2. keytool -printcert -file ./deployment_cert.der 
+- 출력화면에서 SHA-1 값을 복사해서
+- SHA-1 인증서 지문 값을 터미널에 다음과 같이 입력합니다.
+3. echo "${PRINTCERT}" | xxd -r -p | openssl base64
+
+출력된 해시 등록.
+ 
+
+===
+근데, 원스토어에 있는 업로드키는 어디에 쓰는 걸까?
+
+
+<!--#include virtual='../../footer.html'-->

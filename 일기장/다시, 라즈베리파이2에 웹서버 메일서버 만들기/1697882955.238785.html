@@ -1,0 +1,118 @@
+<!--#include virtual='../../header.html'-->
+- 다시, 라즈베리파이2에 웹서버 메일서버 만들기
+- 
+- 2023.10.21
+
+1. 백업데이타 가져오기
+sudo apt-get install vsftpd
+
+3. emacs 설치
+sudo apt install emacs-nox
+
+4. etc/vsftpd.conf 설정 변경
+write_enable=YES
+
+5. apache 설치
+sudo apt install apache2
+
+6. pip 설치
+sudo apt install pip
+
+7. flask 설치, system wide
+sudo pip install flask --break-system-packages
+
+8. /etc/apache2.conf
+AddDefaultCharset utf-8
+ServerName 127.0.0.1
+
+9. flask wsgi 모듈 설치
+sudo apt install libapache2-mod-wsgi-py3
+
+9. /etc/apache2/sites-available/000-default.conf
+
+[VirtualHost *:2023]
+       ServerName gilai.net
+
+        ServerAdmin master@localhost
+        DocumentRoot /home/xxxx/www
+
+        WSGIScriptAlias / /home/xxxx/www/mod.wsgi
+        WSGIDaemonProcess myhome user=www-data group=xxxx threads=3 maximum-requests=5
+
+    [Directory /home/xxxx/www]
+        WSGIProcessGroup myhome
+        WSGIApplicationGroup %{GLOBAL}
+        Order deny,allow
+        Allow from all
+    [/Directory]
+[/VirtualHost]
+
+10. /etc/apache2/ports.conf / 2023
+
+11. mod.wsgi
+import sys
+sys.path.insert(0, '/home/xxxx/www')
+from myhome import app as application
+
+12. postfix 설치
+sudo apt install postfix
+
+12. /etc/postfix/main.cf 
+smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
+myhostname = xxx
+alias_maps = hash:/etc/aliases
+alias_database = hash:/etc/aliases
+myorigin = /etc/mailname
+mydestination = $myhostname, gilai.net, xxx, localhost.localdomain, localhost
+inet_interfaces = all
+inet_protocols = all
+
+12. /etc/postfix/master.cf
+smtp      inet  n       -       y       -       -       smtpd
+-o smtpd_reject_unlisted_recipient=yes
+
+13. alpine 설치
+sudo apt install alpine
+
+14. ~/.pinerc 설정
+personal-name=xxxx
+
+# Sets domain part of From: and local addresses in outgoing mail.
+user-domain=gilai.net
+
+# List of SMTP servers for sending mail. If blank: Unix Alpine uses sendmail.
+smtp-server=smtp.gmail.com:587/tls/user=xxxxxx@gmail.com
+
+2차 인증, 앱비밀번호 받기
+xxxx xxxx xxxx xxxx
+
+15. /etc/aliases 메일계정 추가
+16. sudo newaliases
+
+17. crontab -e
+0 0 * * * /usr/bin/bash /etc/cron.daily/backup_script.sh
+
+19. /etc/hosts.deny
+sshd: ALL
+20. /etc/hosts.allow
+sshd: xxx.xxx.xxx.xxx
+21. /etc/ssh/sshd_config 
+port 변경
+
+-- apache 로그에서 아이피주소 지우기
+logformat 에서 %h를 0.0.0.0 으로 바꾸기
+
+-- apache 로그에서 내 접속은 빼기
+SetEnvIf Remote_Addr "^192\.168\.0\.\d+$" dontlog
+CustomLog /var/log/apache2/access.log combined env=!dontlog
+
+-- apache log rotate
+/etc/logrotate.d/apache2
+daily / rotate 3 / nocompress
+[[logrotate uses crontab to work. It's scheduled work, not a daemon, so no need to reload its configuration.]]
+
+
+
+
+
+<!--#include virtual='../../footer.html'-->
