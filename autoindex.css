@@ -15,7 +15,7 @@ td {
 }
 
 /* 모바일용 스타일 */
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1200px) {
     body {
 	font-size: 1.2em;
     }
