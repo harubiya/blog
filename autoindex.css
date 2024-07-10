@@ -1,8 +1,9 @@
 h1 {
     font-size: 1.5em;
 }
-table {
-    border-spacing: 10;
+table#indexlist {
+    border-spacing: 15;
+    width: 50%;
 }
 
 a {
@@ -30,6 +31,10 @@ td {
 
     table {
 	width: 100%;
+    }
+
+    h1 {
+	font-size: 1.2em;
     }
 
 }
