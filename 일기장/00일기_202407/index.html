@@ -1,5 +1,112 @@
 <!--#include virtual='../../header.html'-->
 
+2024.7.12
+
+// chatgpt
+// 특정 패턴 제외하고 현재 모든 디렉토리 이동
+find . -maxdepth 1 ! -name '00*' -exec mv -t /path/to/destination {} +
+
+// 디렉토리 내 모든 파일들의 문자열 치환
+find . -type f -name 'index.html' -exec sed -i 's|\.\./\.\./|../../../|g' {} +
+
+
+예전에 펄스크립트 짜서 수정했는데...
+sed로 한줄명령으로 된다. sed 알고는 있었는데, 꼭 스크립트 짤 생각만 하고.
+그나저나 이제 bash든 python이든 내가 필요한 정도의 스크립트는 chatgpt가 다해준다. 넘 편함.
+아직, 비알림이나 우중캠핑정도의 코딩은 못함. 특정 함수 예제는 만들 수 있지만. 전체를 짜지는 못함. 유료버전은 할 수 있을까? 할 수 있어도... 어차피 코딩은 그림그리기같은 결계 만드는 취미니까. 그러고보면 돈되는 노동은 몸쓰는 노동... 
+
+
+의존성.
+내 책상에 bash 매뉴얼책을 가지고 있지 않다면, 아마 구글 검색을 해서 옵션들 사용예제를 찾으려고 했을 것.
+man sed 는 보통 도움이 안되서. 또 외우고 있지도 못할거고. 시행착오로 이것저것 해볼 수 있는 것도. 귀쟎.
+
+아이폰의 온디바이스 ai처럼, 노트북 피시에 특정 분야의 ai칩을 CD끼우듯, 필요에 따라 갈아끼울 수 있다면...
+chatgpt보다 더 비쌀까? 지구환경에는 온디바이스가 더 나을까?
+
+
+
+/////chagpt
+`sed`(stream editor)는 텍스트 파일을 조작하는 데 사용되는 강력한 도구입니다. 주로 파일의 내용을 검색하고 변환하거나 특정 패턴을 치환하는 작업에 사용됩니다.
+
+### 기본 사용법
+`sed`의 기본 형식은 다음과 같습니다:
+```bash
+sed 's/old/new/' file
+```
+이 명령어는 `file`에서 `old`라는 패턴을 찾아 `new`로 한 번만 바꿉니다.
+
+### 주요 옵션 및 예제
+
+3. **전체 라인 치환**
+   ```bash
+   sed 's/World/Universe/g' input.txt
+   ```
+   `g` 플래그를 사용하여 한 라인의 모든 `World`를 `Universe`로 치환합니다.
+
+4. **파일 수정**
+   ```bash
+   sed -i 's/World/Universe/g' input.txt
+   ```
+   `-i` 옵션을 사용하여 `input.txt` 파일을 직접 수정합니다.
+
+5. **특정 라인 치환**
+   ```bash
+   sed '2s/World/Universe/' input.txt
+   ```
+   `input.txt` 파일의 두 번째 라인에서만 `World`를 `Universe`로 치환합니다.
+
+7. **패턴으로 라인 삭제**
+   ```bash
+   sed '/pattern/d' input.txt
+   ```
+   `input.txt` 파일에서 `pattern`을 포함하는 모든 라인을 삭제합니다.
+
+8. **라인 번호로 라인 삭제**
+   ```bash
+   sed '2d' input.txt
+   ```
+   `input.txt` 파일의 두 번째 라인을 삭제합니다.
+
+9. **라인 삽입**
+   ```bash
+   sed '2i\This is a new line.' input.txt
+   ```
+   `input.txt` 파일의 두 번째 라인 위에 `This is a new line.`을 삽입합니다.
+
+10. **특정 라인 뒤에 라인 추가**
+    ```bash
+    sed '2a\This is a new line.' input.txt
+    ```
+    `input.txt` 파일의 두 번째 라인 뒤에 `This is a new line.`을 추가합니다.
+
+### 고급 예제
+
+1. **범위 내 치환**
+   ```bash
+   sed '2,4s/World/Universe/' input.txt
+   ```
+   `input.txt` 파일의 2번째부터 4번째 라인 사이에서 `World`를 `Universe`로 치환합니다.
+
+2. **정규 표현식 사용**
+   ```bash
+   echo "2024-07-12" | sed 's/\([0-9]\{4\}\)-\([0-9]\{2\}\)-\([0-9]\{2\}\)/\3\/\2\/\1/'
+   ```
+   출력: `12/07/2024`
+
+   이 명령어는 날짜 형식을 `YYYY-MM-DD`에서 `DD/MM/YYYY`로 변환합니다.
+
+3. **파일 끝에 라인 추가**
+   ```bash
+   sed '$a\This is the end of the file.' input.txt
+   ```
+   `input.txt` 파일의 마지막 라인에 `This is the end of the file.`을 추가합니다.
+
+`sed`는 매우 유연하고 강력한 도구로, 다양한 텍스트 조작 작업을 자동화하는 데 유용합니다.
+
+
+
+
+///////////////////////////////////////
 2024.7.11
 <b>- 다른도서관 첫방문</b>                                                                                     
 

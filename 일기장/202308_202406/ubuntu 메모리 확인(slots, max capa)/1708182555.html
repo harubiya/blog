@@ -1,0 +1,43 @@
+<!--#include virtual='../../../header.html'-->
+- ubuntu 메모리 확인(slots, max capa)
+- 
+- 2024.02.18
+
+sudo dmidecode -t 16
+# dmidecode 3.3
+Getting SMBIOS data from sysfs.
+SMBIOS 2.7 present.
+
+Handle 0x0008, DMI type 16, 23 bytes
+Physical Memory Array
+        Location: System Board Or Motherboard
+        Use: System Memory
+        Error Correction Type: None
+        Maximum Capacity: 8 GB
+        Error Information Handle: No Error
+        Number Of Devices: 2
+====================
+sudo lshw -class memory
+  *-memory
+       description: System Memory
+       physical id: 8
+       slot: System board or motherboard
+       size: 4GiB
+     *-bank:0
+          description: SODIMM [empty]
+          physical id: 0
+          slot: DIMM0
+     *-bank:1
+          description: SODIMM DDR3 Synchronous 1066 MHz (0.9 ns)
+          product: M471B5273DH0-CH9
+          vendor: Samsung
+          physical id: 1
+          serial: 005765FD
+          slot: DIMM1
+          size: 4GiB
+          width: 8 bits
+          clock: 1066MHz (0.9ns)
+
+===
+
+<!--#include virtual='../../../footer.html'-->
