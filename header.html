@@ -12,7 +12,8 @@
       .quote {
 	  color: #00002a;
 	  font-size: 0.9em;
-	  /*font-family: 'Nanum Myeongjo', sans-serif !important;*/
+	  border-left: 2px dotted black;
+	  padding: 5px;
       }
 
       u {
@@ -38,6 +39,25 @@
       }
 
     </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+	  var contentElements = document.getElementsByClassName("wrap");
+	  
+	  for (var i = 0; i < contentElements.length; i++) {
+              var content = contentElements[i].innerHTML;
+
+              // Regular expression to find [[ ...text... ]]
+              var regex = /\[\[([^\]]+)\]\]/g;
+
+              // Replace pattern with span elements
+              var newContent = content.replace(regex, '<div class="quote">$1</div>');
+
+              // Update the HTML content
+              contentElements[i].innerHTML = newContent;
+	  }
+      });
+
+    </script>
   </head>
   <body>
     <pre class="wrap">
