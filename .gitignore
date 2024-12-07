@@ -1,2 +1,7 @@
 *~
 .htaccess
+noteroot/
+work/
+트위터백업/
+wsgi/
+
