@@ -1,0 +1,15 @@
+
+#.htaccess
+
+Options Indexes Includes FollowSymLinks
+AddOutputFilter INCLUDES .html
+
+IndexOrderDefault Descending Date
+IndexOptions FancyIndexing HTMLTable SuppressSize SuppressDescription SuppressLastModified
+IndexStyleSheet "http://gilai.net:2025/autoindex.css?11"
+
+IndexIgnore .htaccess header.html footer.html *.css *.sh *.conf README.html HEADER.html sitemap.xml rob\
+ots.txt wsgi work noteroot
+
+ReadmeName README.html
+HeaderName HEADER.html

@@ -1,0 +1,7 @@
+# .htaccess 파일
+AddType text/html .diary
+AddOutputFilter INCLUDES .html .diary
+
+Options +Indexes
+IndexIgnore *.mp3 *.mp4 *.webp
+
