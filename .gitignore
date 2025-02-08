@@ -5,4 +5,8 @@ work/
 문서자료/
 wsgi/
 *.mp4
+*.mp3
+*.jpg
+*.gif
+*.jpeg
 
