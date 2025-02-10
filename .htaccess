@@ -12,4 +12,4 @@ IndexIgnore .htaccess header.html footer.html *.css *.sh *.conf README.html HEAD
 ots.txt wsgi work noteroot
 
 ReadmeName README.html
-HeaderName HEADER.html
+HeaderName /HEADER.html
