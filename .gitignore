@@ -9,4 +9,4 @@ wsgi/
 *.jpg
 *.gif
 *.jpeg
-
+.htpasswd

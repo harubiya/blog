@@ -5,3 +5,10 @@ AddOutputFilter INCLUDES .html .diary
 Options +Indexes
 IndexIgnore *.mp3 *.mp4 *.webp
 
+IndexOptions +ShowForbidden
+<Files "*.diary">
+    AuthName "Username and password required"
+    AuthUserFile /home/gilai/www/일기장/.htpasswd
+
+    AuthType Basic
+</Files>
