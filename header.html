@@ -52,8 +52,11 @@
               // Replace pattern with span elements
               var newContent = content.replace(regex, '<div class="quote">$1</div>');
 
+	      var regex = /\=([\u4E00-\u9FFF\/～]+)\s*([^=]*)\=/g;
+	      var rubyText = newContent.replace(regex, '<ruby><b>$1</b><rt>$2</rt></ruby>');
+
               // Update the HTML content
-              contentElements[i].innerHTML = newContent;
+              contentElements[i].innerHTML = rubyText;
 	  }
       });
 
