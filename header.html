@@ -38,6 +38,7 @@
 	  .wrap { font-size: 1em; }
       }
 
+      audio { width: 100px; height: 25px; padding-top:5px; }
     </style>
     <script>
       document.addEventListener("DOMContentLoaded", function() {
@@ -52,11 +53,14 @@
               // Replace pattern with span elements
               var newContent = content.replace(regex, '<div class="quote">$1</div>');
 
-	      var regex = /\=([\u4E00-\u9FFF\/～]+)\s*([^=]*)\=/g;
-	      var rubyText = newContent.replace(regex, '<ruby><b>$1</b><rt>$2</rt></ruby>');
+	      regex = /\=([\u4E00-\u9FFF\/～]+)\s*([^=]*)\=/g;
+	      var newContent2 = newContent.replace(regex, '<ruby><b>$1</b><rt>$2</rt></ruby>');
+
+	      regex = /audio_([\u4E00-\u9FFF]+\.mp3)/g;
+	      var newContent3 = newContent2.replace(regex, "<audio controls><source src='media/$1'></audio>");
 
               // Update the HTML content
-              contentElements[i].innerHTML = rubyText;
+              contentElements[i].innerHTML = newContent3;
 	  }
       });
 
