@@ -28,7 +28,8 @@
           border-radius: 10px;
           box-shadow: 0 0 15px rgba(0,0,0,0.1);
           width: 90%;
-          max-width: 800px;
+	  height: 90%;
+          max-width: 1000px;
           text-align: center;
       }
       .sentence-display {
@@ -52,6 +53,12 @@
           bottom: 0.0em; /* 밑줄과 글자 위치 미세 조정 */
       }
       .pinyin-display {
+          font-size: 1.2em;
+          color: #777;
+          margin-bottom: 25px;
+          min-height: 20px;
+      }
+      .desc-display {
           font-size: 1.2em;
           color: #777;
           margin-bottom: 25px;
@@ -132,6 +139,22 @@
 	  border-radius: 6px;
 	  border: 1px solid #ccc;
       }
+      .tts-button {
+	  color: blue;
+	  background-color: #fff;
+	  border: none;
+	  border-radius: 8px;
+	  padding: 8px 12px;
+	  font-size: 24px;
+	  cursor: pointer;
+	  display: inline-flex;
+	  align-items: center;
+	  gap: 8px;
+      }
+
+      .tts-button:hover {
+	  background-color: #e0e0e0;
+      }
     </style>
   </head>
   <body>
@@ -145,11 +168,12 @@
     <h1>한자 퀴즈</h1>
       <div id="sentence-display" class="sentence-display"></div>
       <div id="pinyin-display" class="pinyin-display"></div>
+      <div id="desc-display" class="desc-display"></div>
       <div id="options-container" class="options-container"></div>
       <div id="feedback-message" class="feedback-message"></div>
       <button class="next-button" disabled>다음 →</button>
     </div>
 
-    <script src="quiz.js"></script>
+  <script src="quiz.js?0603"></script>
   </body>
 </html>

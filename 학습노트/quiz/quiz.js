@@ -1,6 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 let notepath = params.get("notepath");
-if(!notepath) notepath = '/학습노트/추구.html';
+if(!notepath) notepath = '/학습노트/고전명문장/index.html';
 
 console.log(notepath);
 
@@ -17,6 +17,7 @@ let allAvailableHanjaChars = "的一是了我不人在他有这个上们来到�
 // --- DOM 요소 가져오기 ---
 const sentenceDisplay = document.getElementById('sentence-display');
 const pinyinDisplay = document.getElementById('pinyin-display');
+const descDisplay = document.getElementById('desc-display');
 const optionsContainer = document.getElementById('options-container');
 const feedbackMessage = document.getElementById('feedback-message');
 
@@ -44,20 +45,23 @@ async function loadAndParseData(filePath) {
 		    originalLine: line,
 		    sentence: sentence,
 		    pinyin: "병음 정보 없음", // 이 형식은 병음이 없음
+		    desc: "",
 		    hanjaChars: sentence.split('')
 		};
 	    }
 	    if(line.startsWith('=')) {
-		const regex = /\=([\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FFF\/～\，]+)\s*([^=]*)\=/g;
+		const regex = /\=([\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FFF\/～\，]+)\s*([^=]*)\=(.*)/g;
 		const match = regex.exec(line);
 		if(match) {
 		    const sentence = match[1].replace(/[^\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FFF]/g, ''); 
-		    const pinyin = (match[2]!==undefined) ? match[2] : "병음 정보 없음";
+		    const pinyin = match[2];
+		    const desc = match[3];
 		    //console.log(line + sentence + ':::' + pinyin);
 		    return {
 			originalLine: line,
 			sentence: sentence,
 			pinyin: pinyin,
+			desc: desc,
 			hanjaChars: sentence.split('')
 		    };
 		}
@@ -86,6 +90,7 @@ async function loadAndParseData(filePath) {
 		    originalLine: line,
 		    sentence: sentence,
 		    pinyin: pinyin,
+		    desc: "",
 		    hanjaChars: sentence.split('')
 		};
 	    } else {
@@ -109,6 +114,7 @@ async function loadAndParseData(filePath) {
 	console.error("퀴즈 데이터 파일 로드 또는 파싱 실패:", error);
 	sentenceDisplay.textContent = "퀴즈 데이터 파일을 불러오는 데 실패했습니다.";
 	pinyinDisplay.textContent = "";
+	descDisplay.textContent = "";
 	optionsContainer.innerHTML = "";
 	feedbackMessage.textContent = `오류: ${error.message}`;
 	processedData = []; // 오류 발생 시 데이터 비우기
@@ -128,6 +134,7 @@ function setupNewQuiz() {
 	    sentenceDisplay.textContent = "퀴즈 데이터가 없습니다.";
 	}
 	pinyinDisplay.textContent = "";
+	descDisplay.textContent = "";
 	optionsContainer.innerHTML = "";
 	// feedbackMessage는 loadAndParseData에서 설정된 오류 메시지를 유지할 수 있도록 여기서 건드리지 않거나,
 	// 혹은 명시적으로 "퀴즈를 시작할 수 없습니다." 등으로 설정할 수 있습니다.
@@ -135,22 +142,23 @@ function setupNewQuiz() {
     }
 
     // 1. 랜덤으로 문장 선택
+    processedData = shuffle(processedData);
     currentQuizData = processedData[Math.floor(Math.random() * processedData.length)];
     const hanjaArray = currentQuizData.hanjaChars;
-
+    
     if (hanjaArray.length === 0) {
 	feedbackMessage.textContent = "선택된 문장에 한자가 없습니다. 다음 문제로 넘어갑니다.";
 	setTimeout(setupNewQuiz, 1500);
 	return;
     }
 
-    // 2. 랜sedData.length)];
-    //할 한자 선택
+    // 2. 랜덤으로 블랭크할 한자 선택
     targetHanjaIndexInSentence = Math.floor(Math.random() * hanjaArray.length);
     targetHanja = hanjaArray[targetHanjaIndexInSentence];
 
-    // 3. 화면에 문장과 병음 표시
-    pinyinDisplay.textContent = `병음: ${currentQuizData.pinyin}`;
+    // 3. 화면에 문장과 병음, 설명 표시
+    pinyinDisplay.textContent = `${currentQuizData.pinyin}`;
+    descDisplay.textContent = `${currentQuizData.desc}`;
     sentenceDisplay.innerHTML = '';
 
     hanjaArray.forEach((char, index) => {
@@ -165,6 +173,19 @@ function setupNewQuiz() {
 	sentenceDisplay.appendChild(charSpan);
     });
 
+    const ttsButton = document.createElement('button');
+    ttsButton.classList.add('tts-button');
+    ttsButton.textContent = '  🔊';
+    pinyinDisplay.appendChild(ttsButton);
+
+    ttsButton.addEventListener("click", function () {
+	const msg = new SpeechSynthesisUtterance(currentQuizData.sentence);
+	msg.lang = "zh-CN";
+	msg.rate = "0.8";
+	speechSynthesis.speak(msg);
+    });
+
+    
     // 4. 선택지 생성 (정답 1개 + 오답 3개)
     let options = [targetHanja];
     const tempHanjaPool = allAvailableHanjaChars.split('');
@@ -218,6 +239,8 @@ function handleOptionClick(selectedHanja, clickedButton) {
 	clickedButton.style.backgroundColor = '#2ecc71';
 	clickedButton.style.color = 'white';
 
+	sentenceDisplay.textContent = currentQuizData.sentence;
+
 	switchNextButton(false);
     } else {
 	feedbackMessage.textContent = `틀렸습니다. 정답은 '${targetHanja}' 입니다.`;
@@ -240,11 +263,18 @@ function switchNextButton(v) {
     nextButton.disabled = v;
 }
 
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+	const j = Math.floor(Math.random() * (i + 1));
+	[array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     const nextButton = document.querySelector(".next-button");
-    
     nextButton.addEventListener("click", function () {
-	setTimeout(setupNewQuiz, 500);
+	setupNewQuiz();
     });
 
     const selectBox = document.querySelector(".note-select");
