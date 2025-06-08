@@ -2,7 +2,7 @@ const params = new URLSearchParams(window.location.search);
 let notepath = params.get("notepath");
 if(!notepath) notepath = '/학습노트/고전명문장/index.html';
 
-console.log(notepath);
+//console.log(notepath);
 
 let processedData = [];
 let currentQuizData = null;
@@ -50,7 +50,7 @@ async function loadAndParseData(filePath) {
 		};
 	    }
 	    if(line.startsWith('=')) {
-		const regex = /\=([\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FFF\/～\，]+)\s*([^=]*)\=(.*)/g;
+		const regex = /\=([\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FFF\/～\，\,\s]+)\s*([^=]*)\=(.*)/g;
 		const match = regex.exec(line);
 		if(match) {
 		    const sentence = match[1].replace(/[^\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FFF]/g, ''); 
@@ -94,7 +94,7 @@ async function loadAndParseData(filePath) {
 		    hanjaChars: sentence.split('')
 		};
 	    } else {
-		//console.warn(`지원하지 않는 데이터 형식입니다: ${line}`);
+		console.warn(`지원하지 않는 데이터 형식입니다: ${line}`);
 		return null; // 지원하지 않는 형식은 건너뜀
 	    }
 	}).filter(item => item !== null && item.sentence && item.sentence.length > 0);
@@ -127,7 +127,9 @@ async function loadAndParseData(filePath) {
 function setupNewQuiz() {
 
     switchNextButton(true);
-
+    document.querySelector('.xie-input').value = "";
+    
+    
     if (processedData.length === 0) {
 	// loadAndParseData에서 이미 오류 메시지를 표시했을 수 있으므로, 여기서는 추가 메시지만 필요한 경우에 표시
 	if (!sentenceDisplay.textContent.includes("실패했습니다") && !sentenceDisplay.textContent.includes("데이터가 없습니다")) {
@@ -142,7 +144,7 @@ function setupNewQuiz() {
     }
 
     // 1. 랜덤으로 문장 선택
-    processedData = shuffle(processedData);
+    //processedData = shuffle(processedData);
     currentQuizData = processedData[Math.floor(Math.random() * processedData.length)];
     const hanjaArray = currentQuizData.hanjaChars;
     
@@ -239,7 +241,7 @@ function handleOptionClick(selectedHanja, clickedButton) {
 	clickedButton.style.backgroundColor = '#2ecc71';
 	clickedButton.style.color = 'white';
 
-	sentenceDisplay.textContent = currentQuizData.sentence;
+	//sentenceDisplay.textContent = currentQuizData.sentence;
 
 	switchNextButton(false);
     } else {

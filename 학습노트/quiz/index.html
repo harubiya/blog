@@ -155,6 +155,24 @@
       .tts-button:hover {
 	  background-color: #e0e0e0;
       }
+      .xie-input {
+	  font-size: 1.6em;
+	  letter-spacing: 0.2em;
+	  text-align: center;
+	  border: none;            /* 테두리 제거 */
+	  border-bottom: 2px solid #eee;  /* 아래쪽에만 라인 */
+	  background: transparent;  /* 배경 투명 */
+	  outline: none;           /* 포커스 시 생기는 기본 테두리 제거 */
+	  padding: 8px 4px;
+	  width: 50%;              /* 컨테이너의 80% 너비 */
+	  display: block;          /* margin auto 정렬을 위해 block 요소로 변경 */
+	  margin: 0 auto;          /* 수평 가운데 정렬 */
+	  transition: border-color 0.3s;
+      }
+
+      .xie-input:focus {
+	  border-bottom-color: #007BFF; /* 포커스 시 색 변경 (선택사항) */
+      }
     </style>
   </head>
   <body>
@@ -162,18 +180,19 @@
     <select class="note-select">
       <option value="/학습노트/듀오링고낙서장.html">듀오링고낙서장 1</option>
       <option value="/학습노트/듀오링고낙서장2.html">듀오링고낙서장 2</option>
+      <option value="/학습노트/듀오링고낙서장3.html">듀오링고낙서장 3</option>
       <option value="/학습노트/추구.html">추구</option>
       <option value="/학습노트/고전명문장/index.html">고전명문장</option>
     </select>
-    <h1>한자 퀴즈</h1>
       <div id="sentence-display" class="sentence-display"></div>
       <div id="pinyin-display" class="pinyin-display"></div>
+      <div><input id=xie-input" class="xie-input" type="text" placeholder="쓰기 연습"></input></div>
       <div id="desc-display" class="desc-display"></div>
       <div id="options-container" class="options-container"></div>
       <div id="feedback-message" class="feedback-message"></div>
       <button class="next-button" disabled>다음 →</button>
     </div>
 
-  <script src="quiz.js?0603"></script>
+  <script src="quiz.js?0607"></script>
   </body>
 </html>
