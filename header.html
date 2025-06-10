@@ -57,7 +57,7 @@
               // Replace pattern with span elements
               var newContent = content.replace(regex, '<div class="quote">$1</div>');
 
-              regex = /\=([\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FFF\/～\，]+)\s*([^=]*)\=/g;
+              regex = /\=([\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FFF\/～\，\。]+)\s*([^=]*)\=/g;
 	      var newContent2 = newContent.replace(regex, "<ruby><b class='hanja'>$1</b><rt>$2</rt></ruby>");
 
 	      regex = /audio_([^\.]+\.mp3)/g;

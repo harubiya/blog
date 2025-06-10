@@ -1,6 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 let notepath = params.get("notepath");
-if(!notepath) notepath = '/학습노트/고전명문장/index.html';
+if(!notepath) notepath = '/학습노트/고전명문장/1부.html';
 
 //console.log(notepath);
 
@@ -50,7 +50,7 @@ async function loadAndParseData(filePath) {
 		};
 	    }
 	    if(line.startsWith('=')) {
-		const regex = /\=([\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FFF\/～\，\,\s]+)\s*([^=]*)\=(.*)/g;
+		const regex = /\=([\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FFF\/～\，\,\s\。]+)\s*([^=]*)\=(.*)/g;
 		const match = regex.exec(line);
 		if(match) {
 		    const sentence = match[1].replace(/[^\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FFF]/g, ''); 
@@ -94,7 +94,7 @@ async function loadAndParseData(filePath) {
 		    hanjaChars: sentence.split('')
 		};
 	    } else {
-		console.warn(`지원하지 않는 데이터 형식입니다: ${line}`);
+		//console.warn(`지원하지 않는 데이터 형식입니다: ${line}`);
 		return null; // 지원하지 않는 형식은 건너뜀
 	    }
 	}).filter(item => item !== null && item.sentence && item.sentence.length > 0);
@@ -273,12 +273,8 @@ function shuffle(array) {
     return array;
 }
 
+/***
 document.addEventListener("DOMContentLoaded", function () {
-    const nextButton = document.querySelector(".next-button");
-    nextButton.addEventListener("click", function () {
-	setupNewQuiz();
-    });
-
     const selectBox = document.querySelector(".note-select");
     for (const option of selectBox.options) {
 	if (option.value === notepath) {
@@ -292,6 +288,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 } );
+***/
+document.addEventListener('DOMContentLoaded', function() {
+    // 서브메뉴를 가진 모든 메뉴 아이템의 링크(a 태그)를 선택
+    const menuLinks = document.querySelectorAll('.sidebar .has-submenu > a');
+
+    menuLinks.forEach(link => {
+	link.addEventListener('click', function(event) {
+	    // a 태그의 기본 동작(페이지 이동 등)을 막음
+	    event.preventDefault();
+
+	    const parentLi = this.parentElement;
+
+	    // 클릭된 메뉴의 부모 li에 'open' 클래스를 토글(추가/제거)
+	    parentLi.classList.toggle('open');
+	});
+    });
+});
 
 // --- 퀴즈 시작 ---
 document.addEventListener('DOMContentLoaded', async () => {
@@ -302,4 +315,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     // 오류 발생 시 메시지를 표시하므로, 여기서는 setupNewQuiz만 호출합니다.
     // setupNewQuiz 함수 내부에서도 processedData.length를 확인합니다.
     setupNewQuiz();
+
+    const nextButton = document.querySelector(".next-button");
+    nextButton.addEventListener("click", function () {
+	setupNewQuiz();
+    });
 });
