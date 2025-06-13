@@ -155,7 +155,7 @@ function setupNewQuiz() {
     }
 
     // 2. 랜덤으로 블랭크할 한자 선택
-    targetHanjaIndexInSentence = Math.floor(Math.random() * hanjaArray.length);
+    targetHanjaIndexInSentence = getBlankIndex();
     targetHanja = hanjaArray[targetHanjaIndexInSentence];
 
     // 3. 화면에 문장과 병음, 설명 표시
@@ -242,6 +242,9 @@ function handleOptionClick(selectedHanja, clickedButton) {
 	clickedButton.style.color = 'white';
 
 	//sentenceDisplay.textContent = currentQuizData.sentence;
+	sentenceDisplay.querySelector('.blank').textContent = selectedHanja;
+	sentenceDisplay.querySelector('.blank').classList.add('char');
+	sentenceDisplay.querySelector('.blank').classList.remove('blank');
 
 	switchNextButton(false);
     } else {
@@ -271,6 +274,20 @@ function shuffle(array) {
 	[array[i], array[j]] = [array[j], array[i]];
     }
     return array;
+}
+
+function getBlankIndex() {
+
+    const easyHanja = ['我','们','你','吗','是','的','想','他','她'];
+    const hanjaArray = currentQuizData.hanjaChars;
+    let maxCount = 100;
+    while(--maxCount) {
+	const i = Math.floor(Math.random() * hanjaArray.length);
+	const hanja = hanjaArray[i];
+	if(!easyHanja.includes(hanja)) return i
+    }
+
+    return 0;
 }
 
 /***
