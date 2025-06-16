@@ -278,7 +278,7 @@ function shuffle(array) {
 
 function getBlankIndex() {
 
-    const easyHanja = ['我','们','你','吗','是','的','想','他','她'];
+    const easyHanja = ['我','们','你','吗','是','的','想','他','她','也','了'];
     const hanjaArray = currentQuizData.hanjaChars;
     let maxCount = 100;
     while(--maxCount) {
@@ -320,6 +320,30 @@ document.addEventListener('DOMContentLoaded', function() {
 	    // 클릭된 메뉴의 부모 li에 'open' 클래스를 토글(추가/제거)
 	    parentLi.classList.toggle('open');
 	});
+    });
+
+    /* --- 반응형 사이드바 토글 기능 추가 --- */
+    const menuToggleBtn = document.querySelector('.menu-toggle-btn');
+    const closeBtn = document.querySelector('.sidebar .close-btn');
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.querySelector('.overlay');
+
+    // 메뉴 열기
+    menuToggleBtn.addEventListener('click', function() {
+	sidebar.classList.add('open');
+	overlay.classList.add('active');
+    });
+
+    // 메뉴 닫기 (닫기 버튼 클릭)
+    closeBtn.addEventListener('click', function() {
+	sidebar.classList.remove('open');
+	overlay.classList.remove('active');
+    });
+
+    // 메뉴 닫기 (오버레이 클릭)
+    overlay.addEventListener('click', function() {
+	sidebar.classList.remove('open');
+	overlay.classList.remove('active');
     });
 });
 
