@@ -382,6 +382,28 @@
 	  position: relative; /* 닫기 버튼의 위치 기준점 */
       }
 
+      .context-menu {
+	  display: none; /* 기본적으로 숨김 */
+	  position: absolute; /* 절대 위치 지정 */
+	  background-color: #fff;
+	  border: 1px solid #ccc;
+	  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+	  z-index: 1000; /* 다른 요소 위에 표시 */
+	  padding: 5px 0;
+	  min-width: 180px; /* 메뉴 너비 조정 */
+      }
+
+      .context-menu-item {
+	  display: block; /* 링크를 블록 요소로 */
+	  padding: 8px 15px;
+	  color: #333;
+	  text-decoration: none; /* 밑줄 제거 */
+	  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+      }
+
+      .context-menu-item:hover {
+	  background-color: #f0f0f0;
+      }
     </style>
   </head>
   <body>
@@ -451,6 +473,12 @@
       </div>
     </main>
 
-  <script src="quiz.js?0613"></script>
+    <div id="custom-context-menu" class="context-menu">
+      <a href="#" target="_blank" class="context-menu-item" data-action="naver-hanja">네이버 한자사전 검색</a>
+      <a href="#" target="_blank" class="context-menu-item" data-action="youdao">중영사전 검색</a>
+      <a href="#" target="_blank" class="context-menu-item" data-action="wiktionary-hanja">위키낱말사전 검색</a>
+      <a href="#" target="_blank" class="context-menu-item" data-action="zi-tools">zi.tools</a>
+    </div>
+  <script src="quiz.js?06192"></script>
   </body>
 </html>

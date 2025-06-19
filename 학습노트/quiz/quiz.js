@@ -278,7 +278,7 @@ function shuffle(array) {
 
 function getBlankIndex() {
 
-    const easyHanja = ['我','们','你','吗','是','的','想','他','她','也','了'];
+    const easyHanja = ['我','们','你','吗','是','的','想','他','她','也','了','子','个','不'];
     const hanjaArray = currentQuizData.hanjaChars;
     let maxCount = 100;
     while(--maxCount) {
@@ -344,6 +344,80 @@ document.addEventListener('DOMContentLoaded', function() {
     overlay.addEventListener('click', function() {
 	sidebar.classList.remove('open');
 	overlay.classList.remove('active');
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const contextMenu = document.getElementById('custom-context-menu');
+    const contextMenuItems = contextMenu.querySelectorAll('.context-menu-item');
+
+    // 한자 유니코드 범위 (C.J.K. 통합 한자 블록)
+    // 가장 일반적으로 사용되는 한자 범위입니다. 더 넓은 범위를 포함할 수도 있습니다.
+    //const HANJA_REGEX = /^[\u4E00-\u9FFF\u3400-\u4DBF\uF900-\uFAFF\u2F800-\u2FA1F]+$/;
+    const HANJA_REGEX = /^[\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FFF]+$/;
+
+    // 텍스트가 한자인지 판별하는 함수
+    function isHanja(text) {
+	// 텍스트에서 공백을 제거하고 검사
+	return HANJA_REGEX.test(text.replace(/\s/g, ''));
+    }
+
+    // 문서 전체에서 마우스 오른쪽 클릭 이벤트 감지
+    document.addEventListener('contextmenu', (e) => {
+	
+
+	// 1. 선택된 텍스트 가져오기
+	const selectedText = window.getSelection().toString().trim();
+
+	// 2. 선택된 텍스트가 비어있거나 한자가 아니면 메뉴 숨김
+	if (!selectedText || !isHanja(selectedText)) {
+	    contextMenu.style.display = 'none';
+	    return;
+	}
+
+	e.preventDefault(); // 브라우저 기본 컨텍스트 메뉴 방지
+	
+	// 3. 한자일 경우 메뉴 표시 및 위치 설정
+	contextMenu.style.top = `${e.clientY+window.scrollY}px`;
+	contextMenu.style.left = `${e.clientX}px`;
+	contextMenu.style.display = 'block';
+
+	// 4. 메뉴 항목의 링크 업데이트
+	contextMenuItems.forEach(item => {
+	    const action = item.dataset.action;
+	    let url = '';
+
+	    switch (action) {
+	    case 'naver-hanja':
+		url = `https://hanja.dict.naver.com/search?query=${encodeURIComponent(selectedText)}`;
+		break;
+	    case 'wiktionary-hanja':
+		url = `https://ko.wiktionary.org/wiki/${encodeURIComponent(selectedText)}`;
+		break;
+	    case 'zi-tools':
+		url = `http://server.zi.tools/zi/${encodeURIComponent(selectedText)}`;
+		break;
+	    case 'youdao':
+		url = `https://youdao.com/result?lang=en&word=${encodeURIComponent(selectedText)}`;
+		break;
+	    default:
+		break;
+	    }
+	    item.href = url;
+	});
+    });
+
+    // 메뉴 외부 클릭 시 메뉴 숨김
+    document.addEventListener('click', (e) => {
+	// 클릭된 요소가 컨텍스트 메뉴 자신이거나 컨텍스트 메뉴의 자식 요소가 아니라면
+	if (!contextMenu.contains(e.target)) {
+	    contextMenu.style.display = 'none';
+	}
+    });
+
+    // 스크롤 시 메뉴 숨김
+    window.addEventListener('scroll', () => {
+	contextMenu.style.display = 'none';
     });
 });
 

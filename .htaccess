@@ -9,7 +9,7 @@ IndexOptions FancyIndexing HTMLTable SuppressSize SuppressDescription SuppressLa
 IndexStyleSheet "http://gilai.net:2025/autoindex.css?11"
 
 IndexIgnore .htaccess header.html footer.html *.css *.sh *.conf README.html HEADER.html sitemap.xml rob\
-ots.txt wsgi work noteroot 문서자료
+ots.txt wsgi work noteroot 문서자료 inc
 
 ReadmeName README.html
 HeaderName /HEADER.html
