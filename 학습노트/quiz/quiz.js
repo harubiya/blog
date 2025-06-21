@@ -391,8 +391,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	    case 'naver-hanja':
 		url = `https://hanja.dict.naver.com/search?query=${encodeURIComponent(selectedText)}`;
 		break;
-	    case 'wiktionary-hanja':
-		url = `https://ko.wiktionary.org/wiki/${encodeURIComponent(selectedText)}`;
+	    case 'baidu':
+		url = `https://hanyu.baidu.com/hanyu-page/zici/s?wd=${encodeURIComponent(selectedText)}`;
 		break;
 	    case 'zi-tools':
 		url = `http://server.zi.tools/zi/${encodeURIComponent(selectedText)}`;
