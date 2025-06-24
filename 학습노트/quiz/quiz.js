@@ -1,6 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 let notepath = params.get("notepath");
-if(!notepath) notepath = '/학습노트/고전명문장/1부.html';
+if(!notepath) notepath = '/학습노트/한시/한시.html';
 
 //console.log(notepath);
 
@@ -278,7 +278,7 @@ function shuffle(array) {
 
 function getBlankIndex() {
 
-    const easyHanja = ['我','们','你','吗','是','的','想','他','她','也','了','子','个','不'];
+    const easyHanja = ['我','们','你','吗','是','的','想','他','她','也','了','子','个','不','什','么'];
     const hanjaArray = currentQuizData.hanjaChars;
     let maxCount = 100;
     while(--maxCount) {
