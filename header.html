@@ -34,7 +34,10 @@
 	  letter-spacing: 0.3rem;
       }
 
-      
+      rt {
+	  font-size: 0.1em;
+      }
+
       @media screen and (min-width: 1024px) {
 	  .wrap { width: 80% }
       }
@@ -58,7 +61,10 @@
               var newContent = content.replace(regex, '<div class="quote">$1</div>');
 
               regex = /\=([\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FFF\/～\，\。\？]+)\s*([^=]*)\=/g;
-	      var newContent2 = newContent.replace(regex, "<ruby><b class='hanja'>$1</b><rt>$2</rt></ruby>");
+	      //var newContent2 = newContent.replace(regex, "<ruby><b class='hanja'>$1</b><rt>$2</rt></ruby>");
+	      var newContent2 = newContent.replace(regex, (match, p1, p2) => {
+		  return convert_to_ruby(p1, p2);
+	      });
 
 	      regex = /audio_([^\.]+\.mp3)/g;
 	      var newContent3 = newContent2.replace(regex, "<audio controls><source src='media/$1'></audio>");
@@ -76,6 +82,25 @@
 	      contentElements[i].innerHTML = content.replace(pattern, (matched) => replacements[matched]);
 	      ***/
 	  }
+
+	  function convert_to_ruby(a, b) {
+	      const pinyins = b.trim().split(/\s+/); // 병음 배열
+	      let pinyinIndex = 0;
+	      let result = '';
+
+	      for (const ch of a) {
+		  // 한자 유니코드 범위: \u4e00 - \u9fff
+		  if (/[\u4e00-\u9fff]/.test(ch)) {
+		      const py = pinyins[pinyinIndex++] || '';
+		      result += `<ruby><b class='hanja'>${ch}</b><rt>${py}</rt></ruby>`;
+		  } else {
+		      result += ch; // 쉼표, 느낌표 등 한자가 아닌 문자
+		  }
+	      }
+
+	      return result;
+	  }
+	  
       });
     </script>
   </head>
