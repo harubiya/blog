@@ -47,41 +47,35 @@
       }
 
       audio { width: 200px; height: 30px; padding-top:5px; }
+
+      .deepseek {
+	  font-size: 0.8em;
+	  color: #000033;
+      }
+
     </style>
     <script>
       document.addEventListener("DOMContentLoaded", function() {
 	  var contentElements = document.getElementsByClassName("wrap");
 	  
+	  const quote_regex = /\[\[([^\]]+)\]\]/g;
+	  const hanja_regex = /\=([\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FFF\/～\，\。\？]+)\s*([^=]*)\=/g;
+	  const audio_regex = /audio_([^\.]+\.mp3)/g;
+	  const deep_regex = /\[dp(.*?)dp\]/g;
+	  
 	  for (var i = 0; i < contentElements.length; i++) {
-              var content = contentElements[i].innerHTML;
-
-              // Regular expression to find [[ ...text... ]]
-              var regex = /\[\[([^\]]+)\]\]/g;
+              let content = contentElements[i].innerHTML;
 
               // Replace pattern with span elements
-              var newContent = content.replace(regex, '<div class="quote">$1</div>');
-
-              regex = /\=([\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FFF\/～\，\。\？]+)\s*([^=]*)\=/g;
-	      //var newContent2 = newContent.replace(regex, "<ruby><b class='hanja'>$1</b><rt>$2</rt></ruby>");
-	      var newContent2 = newContent.replace(regex, (match, p1, p2) => {
+              let newContent = content.replace(quote_regex, '<div class="quote">$1</div>');
+	      newContent = newContent.replace(hanja_regex, (match, p1, p2) => {
 		  return convert_to_ruby(p1, p2);
 	      });
-
-	      regex = /audio_([^\.]+\.mp3)/g;
-	      var newContent3 = newContent2.replace(regex, "<audio controls><source src='media/$1'></audio>");
-
+	      newContent = newContent.replace(audio_regex, "<audio controls><source src='media/$1'></audio>");
+	      newContent = newContent.replace(deep_regex, "<span class='deepseek'>- $1 (deepseek) -</span>");
+	      
               // Update the HTML content
-              contentElements[i].innerHTML = newContent3;
-
-	      /***const replacements = {
-		  '\[\[([^\]]+)\]\]' : "<div class='quote'>$1</div>",
-		  '\=([\u4E00-\u9FFF\/～]+)\s*([^=]*)\=' : "<ruby><b>$1</b><rt>$2</rt></ruby>",
-		  'audio_([\u4E00-\u9FFF|a-z0-9\_]+\.mp3)' : "<audio controls><source src='media/$1'></audio>"
-	      }
-
-	      const pattern = new RegExp(Object.keys(replacements).join("|"), "g");
-	      contentElements[i].innerHTML = content.replace(pattern, (matched) => replacements[matched]);
-	      ***/
+              contentElements[i].innerHTML = newContent;
 	  }
 
 	  function convert_to_ruby(a, b) {
