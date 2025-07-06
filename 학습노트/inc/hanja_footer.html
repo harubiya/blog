@@ -80,6 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	    case 'youdao':
 		url = `https://youdao.com/result?lang=en&word=${encodeURIComponent(selectedText)}`;
 		break;
+	    case 'zdic':
+		url = `https://www.zdic.net/hans/${encodeURIComponent(selectedText)}`;
+		break;
 	    default:
 		break;
 	    }
@@ -104,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <div id="custom-context-menu" class="context-menu">
   <a href="#" target="_blank" class="context-menu-item" data-action="naver-hanja">네이버 한자사전 검색</a>
+  <a href="#" target="_blank" class="context-menu-item" data-action="zdic">漢典 검색</a>  
   <a href="#" target="_blank" class="context-menu-item" data-action="youdao">중영사전 검색</a>
   <a href="#" target="_blank" class="context-menu-item" data-action="baidu">바이두사전 검색</a>
   <a href="#" target="_blank" class="context-menu-item" data-action="zi-tools">zi.tools</a>

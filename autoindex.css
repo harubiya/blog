@@ -11,25 +11,26 @@ a {
 }
 
 td {
-    vertical-align: top;
+    vertical-align: middle;
 }
 
 /* 모바일용 스타일 */
 @media screen and (max-width: 1024px) {
-    body {
-	font-size: 1.2em;
-    }
 
-    pre, table {
+    pre {
 	font-size: 2.3em;
 	border-spacing: 20;
     }
 
+    td.indexcolicon img{
+	width: 80%;
+    }
     td.indexcollastmod {
 	font-size: 0.7em;
     }
 
     table#indexlist {
+	font-size: 3em;
 	width: 100%;
     }
 
