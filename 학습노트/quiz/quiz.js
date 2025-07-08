@@ -1,6 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 let notepath = params.get("notepath");
-if(!notepath) notepath = '/학습노트/한시/한시.html';
+if(!notepath) notepath = '/학습노트/한시/한시퀴즈용.html~';
 
 //console.log(notepath);
 
@@ -399,6 +399,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		break;
 	    case 'youdao':
 		url = `https://youdao.com/result?lang=en&word=${encodeURIComponent(selectedText)}`;
+		break;
+	    case 'zdic':
+		url = `https://www.zdic.net/hans/${encodeURIComponent(selectedText)}`;
 		break;
 	    default:
 		break;
