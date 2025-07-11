@@ -1,0 +1,27 @@
+@font-face {
+    font-family: '';
+    src: url('KoPubWorldDotumPM.woff2') format('woff2'),
+        url('KoPubWorldDotumPM.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: '';
+    src: url('KoPubWorldDotumPL.woff2') format('woff2'),
+        url('KoPubWorldDotumPL.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: '';
+    src: url('KoPubWorldDotumPB.woff2') format('woff2'),
+        url('KoPubWorldDotumPB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

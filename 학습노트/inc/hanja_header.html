@@ -3,12 +3,26 @@
     <!--common header //-->
     <meta charset="UTF-8">
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 
+    <link rel="preload" href="/font/kopub/KoPubWorldDotumPM.woff2" as="font" type="font/woff2" crossorigin>
 
     <style>
+      @font-face {
+	  font-family: 'GowunDodum-Regular';
+	  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
+	  font-weight: normal;
+	  font-style: normal;
+      }
+
+      @font-face {
+	  font-family: 'KoPubWorldDotum';
+	  src: url('/font/kopub/KoPubWorldDotumPM.woff2') format('woff2'),
+               url('/font/kopub/KoPubWorldDotumPM.woff') format('woff');
+	  font-weight: normal;
+	  font-style: normal;
+	  font-display: swap;
+      }
+
       .quote {
 	  color: #00002a;
 	  font-size: 0.9em;
@@ -22,7 +36,9 @@
       }
 
       .wrap {
-	  font-family: 'Gowun Dodum', sans-serif;
+	  /*font-family: 'Gowun Dodum', sans-serif;*/
+	  /*font-family: 'GowunDodum-Regular', sans-serif;*/
+	  font-family: 'KoPubWorldDotum', sans-serif;
 	  font-size: 1.5em;
 	  padding: 10px;
 	  word-wrap: break-word; /* 긴 단어를 강제로 줄바꿈 */
@@ -40,17 +56,13 @@
 
       @media screen and (min-width: 1024px) {
 	  .wrap { width: 80% }
-	  .dic { font-size: 1.em; }
+	  .hanja { font-size: 1.2em; }
       }
       @media screen and (max-width: 1024px) {
 	  .wrap { font-size: 1em; }
-	  .dic { font-size: 0.8em; }
 	  rt { font-size: 0.4em; }
       }
-      @media print {
-	  .dic { font-size: 0.5em; }
-	  audio { display: none; }
-      }
+
       audio { width: 200px; height: 30px; padding-top:5px; }
 
       .deepseek {
@@ -105,4 +117,12 @@
     </script>
   </head>
   <body>
+<pre>    (`/\
+ `=\/\ __...--~~~~~-._   _.-~~~~~--...__
+  `=\/\               \ /               \\
+   `=\/                V                 \\
+   //_\___--~~~~~~-._  |  _.-~~~~~~--...__\\
+  //  ) (..----~~~~._\ | /_.~~~~----.....__\\
+ ===( INK )==========\\|//====================허름하고 후미진,
+__ejm\___/________dwb`---`____________________________</pre>
 <pre class="wrap">
