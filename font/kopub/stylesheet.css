@@ -1,26 +1,26 @@
 @font-face {
-    font-family: '';
-    src: url('KoPubWorldDotumPM.woff2') format('woff2'),
-        url('KoPubWorldDotumPM.woff') format('woff');
-    font-weight: normal;
+    font-family: 'KoPubWorldBatang';
+    src: url('KoPubWorldBatangBold.woff2') format('woff2'),
+        url('KoPubWorldBatangBold.woff') format('woff');
+    font-weight: bold;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: '';
-    src: url('KoPubWorldDotumPL.woff2') format('woff2'),
-        url('KoPubWorldDotumPL.woff') format('woff');
-    font-weight: normal;
+    font-family: 'KoPubWorldBatang';
+    src: url('KoPubWorldBatangLight.woff2') format('woff2'),
+        url('KoPubWorldBatangLight.woff') format('woff');
+    font-weight: 300;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: '';
-    src: url('KoPubWorldDotumPB.woff2') format('woff2'),
-        url('KoPubWorldDotumPB.woff') format('woff');
-    font-weight: normal;
+    font-family: 'KoPubWorldBatang';
+    src: url('KoPubWorldBatangMedium.woff2') format('woff2'),
+        url('KoPubWorldBatangMedium.woff') format('woff');
+    font-weight: 500;
     font-style: normal;
     font-display: swap;
 }
