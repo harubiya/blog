@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 텍스트가 한자인지 판별하는 함수
     function isHanja(text) {
 	// 텍스트에서 공백을 제거하고 검사
-	return HANJA_REGEX.test(text.replace(/\s/g, ''));
+	return HANJA_REGEX.test(text);
     }
 
     // 문서 전체에서 마우스 오른쪽 클릭 이벤트 감지
@@ -47,8 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 
 	// 1. 선택된 텍스트 가져오기
-	const selectedText = window.getSelection().toString().trim();
-
+	const selectedText = window.getSelection().toString().trim().replace(/\s+|[a-z]+/g, '');
+	
 	// 2. 선택된 텍스트가 비어있거나 한자가 아니면 메뉴 숨김
 	if (!selectedText || !isHanja(selectedText)) {
 	    contextMenu.style.display = 'none';
