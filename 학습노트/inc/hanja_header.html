@@ -79,7 +79,7 @@
 	  const quote_regex = /\[\[([^\]]+)\]\]/g;
 	  const hanja_regex = /\=([\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FFF\/～\，\。\？]+)\s*([^=]*)\=/g;
 	  const audio_regex = /audio_([^\.]+\.mp3)/g;
-	  const deep_regex = /\[dp(.*?)dp\]/g;
+	  const ai_regex = /\[(dp|ch|ge|deepseek|chatgpt|gemini)(.*?)(dp|ch|ge)\]/g;
 	  
 	  for (var i = 0; i < contentElements.length; i++) {
               let content = contentElements[i].innerHTML;
@@ -90,8 +90,15 @@
 		  return convert_to_ruby(p1, p2);
 	      });
 	      newContent = newContent.replace(audio_regex, "<audio controls><source src='media/$1'></audio>");
-	      newContent = newContent.replace(deep_regex, "<span class='deepseek'>- $1 (deepseek) -</span>");
-	      
+	      newContent = newContent.replace(ai_regex, (match, p1, p2) => {
+		  switch(p1) {
+		  case 'dp': p1 = 'deepseek'; break;
+		  case 'ch': p1 = 'chatgpt'; break;
+		  case 'ge': p1 = 'gemini'; break;
+		  }
+		  return `<span class='deepseek'>- ${p2} (${p1}) -</span>`;
+	      });
+					      
               // Update the HTML content
               contentElements[i].innerHTML = newContent;
 	  }
