@@ -66,7 +66,7 @@
 
       audio { width: 200px; height: 30px; padding-top:5px; }
 
-      .deepseek {
+      .deepseek, .ai-quote {
 	  font-size: 0.8em;
 	  color: #000033;
       }
@@ -96,7 +96,7 @@
 		  case 'ch': p1 = 'chatgpt'; break;
 		  case 'ge': p1 = 'gemini'; break;
 		  }
-		  return `<span class='deepseek'>- ${p2} (${p1}) -</span>`;
+		  return `<span class='ai-quote'>- ${p2} (${p1}) -</span>`;
 	      });
 					      
               // Update the HTML content
