@@ -1,6 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 let notepath = params.get("notepath");
-if(!notepath) notepath = '/학습노트/한시/한시퀴즈용.html~';
+if(!notepath) notepath = '/학습노트/한시/한시퀴즈데이타.html~';
 
 //console.log(notepath);
 
@@ -56,7 +56,7 @@ async function loadAndParseData(filePath) {
 		    const sentence = match[1].replace(/[^\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FFF]/g, ''); 
 		    const pinyin = match[2];
 		    const desc = match[3];
-		    //console.log(line + sentence + ':::' + pinyin);
+		    console.log(line);
 		    return {
 			originalLine: line,
 			sentence: sentence,
@@ -148,9 +148,9 @@ function setupNewQuiz() {
     currentQuizData = processedData[Math.floor(Math.random() * processedData.length)];
     const hanjaArray = currentQuizData.hanjaChars;
     
-    if (hanjaArray.length === 0) {
-	feedbackMessage.textContent = "선택된 문장에 한자가 없습니다. 다음 문제로 넘어갑니다.";
-	setTimeout(setupNewQuiz, 1500);
+    if (hanjaArray.length < 7) { // 문장만 퀴즈에 포함, 단어는 뺌.
+	//feedbackMessage.textContent = "선택된 문장에 한자가 없습니다. 다음 문제로 넘어갑니다.";
+	setTimeout(setupNewQuiz, 10);
 	return;
     }
 
