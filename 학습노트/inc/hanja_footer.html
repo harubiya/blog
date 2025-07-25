@@ -47,7 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 
 	// 1. 선택된 텍스트 가져오기
-	const selectedText = window.getSelection().toString().trim().replace(/\s+|[a-z]+/g, '');
+	const selectedText = window.getSelection().toString().trim().
+	      replace(/\s+|[a-zāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜü]+/g, '');
 	
 	// 2. 선택된 텍스트가 비어있거나 한자가 아니면 메뉴 숨김
 	if (!selectedText || !isHanja(selectedText)) {
