@@ -1,4 +1,4 @@
 #한시/bin
 
 Options +ExecCGI -Indexes
-AddHandler cgi-script .sh
+AddHandler cgi-script .sh .pl
