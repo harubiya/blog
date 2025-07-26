@@ -1,0 +1,61 @@
+<script>document.title='허름하고 후미진';</script>
+  
+<pre>
+    (`/\
+ `=\/\ __...--~~~~~-._   _.-~~~~~--...__
+  `=\/\               \ /               \\
+   `=\/                V                 \\
+   //_\___--~~~~~~-._  |  _.-~~~~~~--...__\\
+  //  ) (..----~~~~._\ | /_.~~~~----.....__\\
+ ===( INK )==========\\|//====================허름하고 후미진,
+__ejm\___/________dwb`---`____________________________________________</pre>
+<input type="text" id="searchInput" placeholder="검색어 입력..." />
+<button id="searchBtn" onclick="search()">검색</button>
+
+<ul id="results"></ul>
+
+<script>
+  function search() {
+      const query = document.getElementById("searchInput").value;
+      // 한글(가-힣), 한자(⺀-鿿)만 허용: 나머지는 제거
+      const cleaned = query.replace(/[^\uAC00-\uD7A3\u4E00-\u9FFF]/g, "");
+      if (cleaned === "") {
+	  alert("한글 또는 한자만 입력해주세요.");
+	  return;
+      }
+      fetch(`/학습노트/한시/bin/search.sh?q=${encodeURIComponent(cleaned)}`)
+	  .then(res => res.json())
+	  .then(data => {
+              const ul = document.getElementById("results");
+              ul.innerHTML = "<li>검색결과: " + data.length;
+
+              data.forEach(file => {
+		  const li = document.createElement("li");
+		  const a = document.createElement("a");
+		  a.href = file;
+		  a.target = '_blank';
+		  a.textContent = file;
+		  li.appendChild(a);
+		  ul.appendChild(li);
+              });
+	  });
+  }
+     
+     // 엔터 키로 검색 가능하게 설정
+     document.getElementById("searchInput").addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+	  e.preventDefault();  // 폼 제출 방지 (필요 시)
+	  document.getElementById("searchBtn").click();  // 버튼 클릭과 동일한 동작
+      }
+     });
+
+     // URL에 ?q= 가 있으면 자동으로 검색 실행
+     window.addEventListener("DOMContentLoaded", () => {
+	 const params = new URLSearchParams(window.location.search);
+	 const rawQuery = params.get("q");
+	 if (rawQuery) {
+	     document.getElementById("searchInput").value = rawQuery;
+	     search(rawQuery);
+	 }
+     });
+</script>
