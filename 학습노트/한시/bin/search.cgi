@@ -1,7 +1,7 @@
 #!/bin/bash
 
-export LC_ALL=C.ko_KR.UTF-8
-export LANG=C.UTF-8
+#export LC_ALL=C.ko_KR.utf8
+#export LANG=C.UTF-8
 
 
 echo "Content-type: application/json"
