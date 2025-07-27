@@ -23,7 +23,7 @@ __ejm\___/________dwb`---`____________________________________________</pre>
 	  alert("한글 또는 한자만 입력해주세요.");
 	  return;
       }
-      fetch(`/학습노트/한시/bin/search.sh?q=${encodeURIComponent(cleaned)}`)
+      fetch(`/학습노트/한시/bin/search.cgi?q=${encodeURIComponent(cleaned)}`)
 	  .then(res => res.json())
 	  .then(data => {
               const ul = document.getElementById("results");

@@ -7,18 +7,17 @@ export LANG=C.UTF-8
 echo "Content-type: application/json"
 echo ""
 
-if [ ${#QUERY} -gt 100 ]; then
-    echo "Error: Query length exceeds the limit."
+if [ ${#QUERY_STRING} -gt 100 ] || [ -z "$QUERY_STRING" ]; then
+    echo "Error: Query empty or length exceeds the limit."
     exit 1
 fi
 
-# 쿼리 파싱
+# 쿼리 파싱 (제미나이)
 QUERY=$(echo "$QUERY_STRING" | sed -n 's/^.*q=\([^&]*\).*$/\1/p' | sed 's/+/ /g')
 QUERY=$(printf "%b" "${QUERY//%/\\x}")
 
-CLEANED_QUERY=$(echo "$QUERY" | sed 's/[a-zA-Z[:punct:]]//g')
-
 # 한글(가-힣)과 한자(一-龥)를 제외한 모든 문자 제거
+CLEANED_QUERY=$(echo "$QUERY" | sed 's/[a-zA-Z[:punct:]]//g')
 CLEANED_QUERY=$(echo "$QUERY" | sed 's/[^가-힣一-龥]//g')
 
 
