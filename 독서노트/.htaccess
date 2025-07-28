@@ -1,0 +1,4 @@
+#/독서노트 디렉토리 .htaccess
+
+HeaderName /독서노트/HEADER.html
+

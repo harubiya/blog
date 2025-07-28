@@ -1,0 +1,4 @@
+#/cgi/.htaccess
+
+Options +ExecCGI -Indexes
+AddHandler cgi-script .cgi

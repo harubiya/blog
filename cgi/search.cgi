@@ -12,6 +12,30 @@ if [ ${#QUERY_STRING} -gt 100 ] || [ -z "$QUERY_STRING" ]; then
     exit 1
 fi
 
+
+# --- 연속 실행 방지 설정 ---
+LOCK_DIR="/tmp" # 락 파일을 저장할 디렉터리 (쓰기 권한 필요)
+LOCK_FILE="$LOCK_DIR/search_cgi_script.lock" # 스크립트별 고유한 파일명
+WAIT_SECONDS=30 # 최소 대기 시간 (1분 = 60초)
+
+# --- 락 파일 검사 및 갱신 ---
+# 1. 락 파일이 존재하는지 확인
+if [ -f "$LOCK_FILE" ]; then
+    LAST_EXEC_TIME=$(cat "$LOCK_FILE")
+    CURRENT_TIME=$(date +%s)
+    ELAPSED_TIME=$((CURRENT_TIME - LAST_EXEC_TIME))
+
+    if [ "$ELAPSED_TIME" -lt "$WAIT_SECONDS" ]; then
+        # 1분 이내에 다시 요청됨 - 요청 거부
+        echo "[]"
+        exit 1
+    fi
+fi
+
+# 2. 락 파일이 없거나 1분 이상 지났다면, 현재 시간으로 락 파일 갱신
+date +%s > "$LOCK_FILE"
+
+
 # 쿼리 파싱 (제미나이)
 QUERY=$(echo "$QUERY_STRING" | sed -n 's/^.*q=\([^&]*\).*$/\1/p' | sed 's/+/ /g')
 QUERY=$(printf "%b" "${QUERY//%/\\x}")
@@ -24,9 +48,9 @@ TARGET=$(printf "%b" "${TARGET//%/\\x}")
 
 # 한글(가-힣)과 한자(一-龥)를 제외한 모든 문자 제거
 CLEANED_QUERY=$(echo "$QUERY" | sed 's/[a-zA-Z[:punct:]]//g')
-CLEANED_QUERY=$(echo "$QUERY" | sed 's/[^가-힣一-龥]//g')
+CLEANED_QUERY=$(echo "$QUERY" | sed 's/[^가-힣一-龥 ]//g')
 
-CLEANED_TARGET=$(echo "$TARGET" | sed 's/[a-zA-Z//g')
+CLEANED_TARGET=$(echo "$TARGET" | sed 's/[a-zA-Z]//g')
 
 # TARGET이 비어있으면 기본값 할당
 # ${parameter:-word} 구문 사용: parameter가 null이거나 unset이면 word를 사용합니다.
