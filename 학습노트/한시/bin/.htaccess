@@ -1,4 +1,3 @@
 #한시/bin
 
-Options +ExecCGI -Indexes
-AddHandler cgi-script .cgi
+Options -Indexes
