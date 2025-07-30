@@ -16,7 +16,7 @@ fi
 # --- 연속 실행 방지 설정 ---
 LOCK_DIR="/tmp" # 락 파일을 저장할 디렉터리 (쓰기 권한 필요)
 LOCK_FILE="$LOCK_DIR/search_cgi_script.lock" # 스크립트별 고유한 파일명
-WAIT_SECONDS=30 # 최소 대기 시간 (1분 = 60초)
+WAIT_SECONDS=10 # 최소 대기 시간 (1분 = 60초)
 
 # --- 락 파일 검사 및 갱신 ---
 # 1. 락 파일이 존재하는지 확인
@@ -27,7 +27,7 @@ if [ -f "$LOCK_FILE" ]; then
 
     if [ "$ELAPSED_TIME" -lt "$WAIT_SECONDS" ]; then
         # 1분 이내에 다시 요청됨 - 요청 거부
-        echo "[]"
+        echo ""
         exit 1
     fi
 fi
