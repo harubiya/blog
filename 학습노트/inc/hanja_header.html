@@ -89,7 +89,7 @@
 	      newContent = newContent.replace(hanja_regex, (match, p1, p2) => {
 		  return convert_to_ruby(p1, p2);
 	      });
-	      newContent = newContent.replace(audio_regex, "<audio controls><source src='media/$1'></audio>");
+	      newContent = newContent.replace(audio_regex, "<audio controls loop><source src='media/$1'></audio>");
 	      newContent = newContent.replace(ai_regex, (match, p1, p2) => {
 		  switch(p1) {
 		  case 'dp': p1 = 'deepseek'; break;
