@@ -5,10 +5,10 @@ AddOutputFilter INCLUDES .html
 
 IndexOrderDefault Descending Date
 IndexOptions FancyIndexing HTMLTable SuppressSize SuppressDescription
-IndexStyleSheet "http://gilai.net:2025/autoindex.css?250713"
+IndexStyleSheet "http://gilai.net:2025/autoindex.css?250803"
 
 IndexIgnore .htaccess header.html footer.html *.css *.sh *.conf README.html HEADER.html sitemap.xml rob\
-ots.txt wsgi work noteroot 문서자료 inc font bin cgi
+ots.txt wsgi work noteroot 문서자료 inc font bin cgi mysearch
 
 #ReadmeName /README.html
 HeaderName /HEADER.html
