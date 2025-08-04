@@ -1,3 +1,10 @@
+/*
+ * 제미나이가 만들고 내가 고침
+ * pm2 strt search.js --watch
+ * pm2 logs
+*/
+
+
 // 필요한 모듈들을 불러옵니다.
 const express = require('express');
 const cors = require('cors'); // CORS 미들웨어 불러오기
@@ -28,6 +35,7 @@ app.get('/search', async (req, res) => {
 
     switch(target) {
     case 'n': resolvedSearchPath = rootDir + '/독서노트/'; break;
+    case 'd': resolvedSearchPath = rootDir + '/일기장/'; break;
     }
 
     // 키워드가 제공되지 않으면 오류 메시지를 반환합니다.
@@ -101,7 +109,8 @@ async function getFilesRecursively(dir) {
         // 파일인 경우
         else {
             // .html 확장자를 가진 파일만 목록에 추가합니다.
-            if (path.extname(entry.name).toLowerCase() === '.html') {
+            if (path.extname(entry.name).toLowerCase() === '.html' ||
+		path.extname(entry.name).toLowerCase() === '.diary' ) {
                 files.push(fullPath);
             }
         }

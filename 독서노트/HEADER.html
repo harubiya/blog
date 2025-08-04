@@ -20,7 +20,6 @@ __ejm\___/________dwb`---`____________________________________________</pre>
       const query = document.getElementById("searchInput").value;
       // 한글(가-힣), 한자(⺀-鿿)만 허용: 나머지는 제거
       const cleaned = query.replace(/[^\uAC00-\uD7A3\u4E00-\u9FFF]/g, "");
-      const target = "독서노트";
       if (cleaned === "") {
 	  alert("한글 또는 한자만 입력해주세요.");
 	  return;

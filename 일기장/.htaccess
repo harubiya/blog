@@ -1,7 +1,7 @@
-# .htaccess 파일
+# /일기장/.htaccess 
 AddType text/html .diary
 AddOutputFilter INCLUDES .html .diary
-
+HeaderName /일기장/HEADER.html
 Options +Indexes
 IndexIgnore *.mp3 *.mp4 *.webp
 

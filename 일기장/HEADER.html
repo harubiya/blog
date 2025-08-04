@@ -1,5 +1,5 @@
-<!--- 학습노트/한시/HEADER.html //--->
-<script>document.title='허름하고 후미진';</script>
+<!--- /일기장/HEADER.html //--->
+<script>document.title='허름하고 후미진 :: 일기장';</script>
   
 <pre>
     (`/\
@@ -10,8 +10,8 @@
   //  ) (..----~~~~._\ | /_.~~~~----.....__\\
  ===( INK )==========\\|//====================허름하고 후미진,
 __ejm\___/________dwb`---`____________________________________________</pre>
-<input type="text" id="searchInput" placeholder="검색어 입력..." style="margin: 10px; font-size: 17px"/>
-<button id="searchBtn" onclick="search()" style="padding:2px">검색</button>
+<input type="text" id="searchInput" placeholder="검색어 입력..." />
+<button id="searchBtn" onclick="search()">검색</button>
 
 <ul id="results"></ul>
 
@@ -20,12 +20,11 @@ __ejm\___/________dwb`---`____________________________________________</pre>
       const query = document.getElementById("searchInput").value;
       // 한글(가-힣), 한자(⺀-鿿)만 허용: 나머지는 제거
       const cleaned = query.replace(/[^\uAC00-\uD7A3\u4E00-\u9FFF]/g, "");
-      const target = "학습노트/한시";
       if (cleaned === "") {
 	  alert("한글 또는 한자만 입력해주세요.");
 	  return;
       }
-      fetch(`http://gilai.net:3000/search?q=${encodeURIComponent(cleaned)}`)
+      fetch(`http://gilai.net:3000/search?q=${encodeURIComponent(cleaned)}&t=d`)
 	  .then(res => res.json())
 	  .then(data => {
               const ul = document.getElementById("results");
