@@ -25,7 +25,7 @@ __ejm\___/________dwb`---`____________________________________________</pre>
 	  alert("한글 또는 한자만 입력해주세요.");
 	  return;
       }
-      fetch(`/cgi/search.cgi?q=${encodeURIComponent(cleaned)}&t=${encodeURIComponent(target)}`)
+      fetch(`http://gilai.net:3000/search?q=${encodeURIComponent(cleaned)}&t=n`)
 	  .then(res => res.json())
 	  .then(data => {
               const ul = document.getElementById("results");
