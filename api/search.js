@@ -1,6 +1,8 @@
 /*
  * 제미나이가 만들고 내가 고침
+ * pm2 unstartup
  * pm2 strt search.js --watch
+ * pm2 startup
  * pm2 logs
 */
 
