@@ -1,0 +1,21 @@
+[Unit]
+Description=My Search Nodejs App
+After=network.target
+
+[Service]
+# 사용자 계정
+User=gilai
+# 앱이 있는 디렉토리
+WorkingDirectory=/home/gilai/www/api
+# Node.js 실행 경로 + 앱 파일
+ExecStart=/snap/bin/node /home/gilai/www/api/search.js
+# 자동 재시작 설정
+Restart=always
+RestartSec=5
+# 로그 파일 저장 위치
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=mysearch
+
+[Install]
+WantedBy=multi-user.target

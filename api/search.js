@@ -1,9 +1,8 @@
 /*
  * 제미나이가 만들고 내가 고침
- * pm2 unstartup
- * pm2 strt search.js --watch
- * pm2 startup
+ * pm2 start search.js --watch
  * pm2 logs
+ * 데몬화할땐 pm2 쓰지말고 직접 systemd 에 등록
 */
 
 
