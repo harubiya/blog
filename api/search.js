@@ -57,6 +57,7 @@ app.get('/search', async (req, res) => {
 	const files = await getFilesRecursively(resolvedSearchPath);
 
 	// 각 파일을 순회하며 키워드가 포함되어 있는지 확인합니다.
+	let key = keyword.replace(/\s/g, '');
 	for (const file of files) {
 	    const baseName = path.basename(file);
 
@@ -64,8 +65,9 @@ app.get('/search', async (req, res) => {
 		matchingFiles.push(file);
 	    } else {
 		try {
-		    const content = fs.readFileSync(file, 'utf-8');
-		    if (content.toLowerCase().includes(keyword.toLowerCase())) {
+		    let content = fs.readFileSync(file, 'utf-8');
+		    content = content.replace(/\s/g, '');
+		    if (content.toLowerCase().includes(key.toLowerCase())) {
 			matchingFiles.push(file);
 		    }
 		} catch (readErr) {
