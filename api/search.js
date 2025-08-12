@@ -101,7 +101,9 @@ async function getFilesRecursively(dir) {
 
     for (const entry of entries) {
         const fullPath = path.join(dir, entry.name);
-        
+
+	if(entry.name.includes('#')) { continue; }
+	
         // 디렉토리인 경우
         if (entry.isDirectory()) {
             // .trash 디렉토리는 제외합니다.

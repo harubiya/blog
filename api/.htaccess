@@ -1,4 +1,8 @@
-#/cgi/.htaccess
+#/api/.htaccess
 
 Options +ExecCGI -Indexes
 AddHandler cgi-script .cgi
+
+<FilesMatch "\.(js|js~)$">
+    Require all denied
+</FilesMatch>
