@@ -17,7 +17,7 @@ find "$CALLER_DIR" -type d -name .trash -prune -o -type f -name '*.html' -print 
     filename=$(basename "$file")
     while IFS= read -r line; do
 	if [[ $line == =* ]]; then
-	    #echo "$line ($filename)" >> "$output_file"
+	    #echo "$line (${CALLER_DIR:-/home/gilai/www}/$filename)" >> "$output_file"
 	    printf "%s (%s)\n" "$line" "$filename" >> "$output_file"
 	fi
     done < "$file"

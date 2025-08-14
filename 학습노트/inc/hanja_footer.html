@@ -87,6 +87,10 @@ document.addEventListener('DOMContentLoaded', () => {
     	    case 'mysearch':
 		url = `/학습노트/한시/?q=${encodeURIComponent(selectedText)}`;
 		break;
+            case 'twdic':
+		url = `https://dict.revised.moe.edu.tw/search.jsp?md=1&sound=1&word=${encodeURIComponent(selectedText)}`;
+		break;
+
 
 	    default:
 		break;
@@ -113,6 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <div id="custom-context-menu" class="context-menu">
   <a href="#" target="_blank" class="context-menu-item" data-action="naver-hanja">네이버 한자사전 검색</a>
   <a href="#" target="_blank" class="context-menu-item" data-action="zdic">漢典 검색</a>
+  <a href="#" target="_blank" class="context-menu-item" data-action="twdic">대만사전 검색</a>
   <a href="#" target="_blank" class="context-menu-item" data-action="mysearch">내꺼 검색</a>  
   <a href="#" target="_blank" class="context-menu-item" data-action="youdao">중영사전 검색</a>
   <a href="#" target="_blank" class="context-menu-item" data-action="baidu">바이두사전 검색</a>
