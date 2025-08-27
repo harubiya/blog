@@ -47,8 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 
 	// 1. 선택된 텍스트 가져오기
+	// 스페이스, 병음기호, 한글은 지움
 	const selectedText = window.getSelection().toString().trim().
-	      replace(/\s+|[a-zāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜü]+/g, '');
+	      replace(/\s+|[a-zāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜü]+|[가-힣]+/g, '');
 	
 	// 2. 선택된 텍스트가 비어있거나 한자가 아니면 메뉴 숨김
 	if (!selectedText || !isHanja(selectedText)) {
