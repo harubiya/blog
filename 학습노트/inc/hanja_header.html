@@ -51,8 +51,12 @@
 	  letter-spacing: 0.3rem;
       }
 
-      rt {
+      ruby.rt {
+	  display: ruby-text;
 	  font-size: 0.1em;
+      }
+      .hidden-rt rt{
+	  display: none;
       }
 
       @media screen and (min-width: 1024px) {
@@ -119,7 +123,7 @@
 		  // 한자 유니코드 범위: \u4e00 - \u9fff
 		  if (/[\u4e00-\u9fff]/.test(ch)) {
 		      const py = pinyins[pinyinIndex++] || '';
-		      result += `<ruby><b class='hanja'>${ch}</b><rt>${py}</rt></ruby>`;
+		      result += `<ruby><b class='hanja'>${ch}</b><rt class='hidden-rt'>${py}</rt></ruby>`;
 		  } else {
 		      result += ch; // 쉼표, 느낌표 등 한자가 아닌 문자
 		  }
@@ -127,7 +131,12 @@
 
 	      return result;
 	  }
-	  
+
+	  document.getElementById("ruby_config").addEventListener("click", function() {
+	      // body에 클래스 hidden-rt를 토글
+	      document.body.classList.toggle("hidden-rt");
+	  });
+
       });
     </script>
   </head>
@@ -140,4 +149,4 @@
   //  ) (..----~~~~._\ | /_.~~~~----.....__\\
  ===( INK )==========\\|//====================허름하고 후미진,
   __ejm\___/________dwb`---`____________________________</pre>
-<pre class="wrap">
+<pre class="wrap"><span id="ruby_config" style="font-size:0.7em; cursor:pointer">루비토글</span>
