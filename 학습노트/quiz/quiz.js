@@ -278,7 +278,7 @@ function shuffle(array) {
 
 function getBlankIndex() {
 
-    const easyHanja = ['我','们','你','吗','是','的','想','他','她','也','了','子','个','不','什','么'];
+    const easyHanja = ['我','们','你','吗','是','的','想','他','她','也','了','子','个','不','什','么','这'];
     const hanjaArray = currentQuizData.hanjaChars;
     let maxCount = 100;
     while(--maxCount) {

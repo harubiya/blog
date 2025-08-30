@@ -13,7 +13,7 @@ ots.txt wsgi work noteroot 문서자료 inc font bin api conf
 #ReadmeName /README.html
 HeaderName /HEADER.html
 
-AuthType Basic
-AuthName "Restricted Area"
-AuthUserFile /home/gilai/www/.htpasswd
-Require valid-user
+#AuthType Basic
+#AuthName "Restricted Area"
+#AuthUserFile /home/gilai/www/.htpasswd
+#Require valid-user
