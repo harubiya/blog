@@ -68,13 +68,16 @@ document.addEventListener('DOMContentLoaded', () => {
 	contextMenuItems.forEach(item => {
 	    const action = item.dataset.action;
 	    let url = '';
-
+	    const enc_st = encodeURIComponent(selectedText);
     	    switch (action) {
 	    case 'naver-hanja':
 		url = `https://hanja.dict.naver.com/search?query=${encodeURIComponent(selectedText)}`;
 		break;
 	    case 'baidu':
-		url = `https://hanyu.baidu.com/hanyu-page/zici/s?wd=${encodeURIComponent(selectedText)}`;
+		url = `https://hanyu.baidu.com/hanyu-page/term/detail?query=${enc_st}&smp_names=termBrand2&wd=${enc_st}&ptype=zici`;
+		break;
+	    case 'baike':
+		url = `https://baike.baidu.com/item/${enc_st}`;
 		break;
 	    case 'zi-tools':
 		url = `http://server.zi.tools/zi/${encodeURIComponent(selectedText)}`;
@@ -118,11 +121,12 @@ document.addEventListener('DOMContentLoaded', () => {
 <div id="custom-context-menu" class="context-menu">
   <a href="#" target="_blank" class="context-menu-item" data-action="naver-hanja">네이버 한자사전 검색</a>
   <a href="#" target="_blank" class="context-menu-item" data-action="zdic">漢典 검색</a>
-  <a href="#" target="_blank" class="context-menu-item" data-action="twdic">대만사전 검색</a>
+  <a href="#" target="_blank" class="context-menu-item" data-action="baike">바이두백과 검색</a>
+  <!--<a href="#" target="_blank" class="context-menu-item" data-action="twdic">대만사전 검색</a>//-->
   <a href="#" target="_blank" class="context-menu-item" data-action="mysearch">내꺼 검색</a>  
-  <a href="#" target="_blank" class="context-menu-item" data-action="youdao">중영사전 검색</a>
-  <a href="#" target="_blank" class="context-menu-item" data-action="baidu">바이두사전 검색</a>
+  <!--<a href="#" target="_blank" class="context-menu-item" data-action="youdao">중영사전 검색</a>//-->
   <a href="#" target="_blank" class="context-menu-item" data-action="zi-tools">zi.tools</a>
+  <a href="#" target="_blank" class="context-menu-item" data-action="baidu">바이두사전(간체)</a>
 </div>
 
 </body>
