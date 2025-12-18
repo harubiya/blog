@@ -64,6 +64,19 @@
 	  display: none;
       }
 
+      .blank-container{ }
+      .blank-input {
+	  height: 35px;
+	  width: 650px;
+          text-align: left;
+          font-size: 1.3em;
+          margin: 5px;
+	  border: none;
+          border-left: 1px solid #ccc;
+	  letter-spacing: 0.3rem;
+	  outline:none;
+      }
+
       @media screen and (min-width: 1024px) {
 	  .wrap { width: 80% }
 	  .hanja { font-size: 1.3em; }
@@ -71,6 +84,7 @@
       @media screen and (max-width: 1024px) {
 	  .wrap { font-size: 1em; }
 	  rt { font-size: 0.4em; }
+	  .blank-container {display: none}
       }
 
       audio { width: 200px; height: 30px; padding-top:5px; }
@@ -94,6 +108,7 @@
 	  
 	  const quote_regex = /\[\[([^\]]+)\]\]/g;
 	  const hanja_regex = /\=([\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FFF\/～\，\。\？\！\、]+)\s*([^=]*)\=/g;
+	  const blank_regex = /\[input\s([\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FFF\/～\，\。\？\！\、]+)\s*([^=]*)\]/g;
 	  const audio_regex = /audio_([^\.]+\.mp3)/g;
 	  const ai_regex = /\[(dp|ch|ge|deepseek|chatgpt|gemini)(.*?)(dp|ch|ge)\]/g;
 	  
@@ -106,6 +121,10 @@
 		  return convert_to_ruby(p1, p2);
 	      });
 	      newContent = newContent.replace(audio_regex, "<audio controls loop><source src='media/$1'></audio>");
+	      newContent = newContent.replace(blank_regex, (match, p1) => {
+		  return make_blank(p1);
+	      });
+	      
 	      newContent = newContent.replace(ai_regex, (match, p1, p2) => {
 		  switch(p1) {
 		  case 'dp': p1 = 'deepseek'; break;
@@ -137,12 +156,34 @@
 	      return result;
 	  }
 
+	  function make_blank(text) {
+	      const div = `<div class="blank-container"><input type="text" class="blank-input" data-answer="${text}" onfocus="make_quiz(this)"/></div>`;
+	      
+	      return div;
+	  }
+
 	  document.getElementById("ruby_config").addEventListener("click", function() {
 	      // body에 클래스 hidden-rt를 토글
 	      document.body.classList.toggle("hidden-rt");
 	  });
 
       });
+
+      function make_quiz(input) {
+	  console.log("onfocus");
+	  input.addEventListener("keydown", function(e) {
+	      if(e.key == 'Enter') {
+		  e.target.onfocus = '';
+		  if(e.target.value === e.target.dataset.answer) {
+		      e.target.value = e.target.value + '(o)';
+		  }
+		  else {
+		      e.target.value = e.target.value + '(x)';
+		  }
+	      }
+	  } );
+      }
+
     </script>
   </head>
   <body>
