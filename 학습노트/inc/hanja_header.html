@@ -175,7 +175,7 @@
 	      if(e.key == 'Enter') {
 		  e.target.onfocus = '';
 		  if(e.target.value === e.target.dataset.answer) {
-		      e.target.value = e.target.value + '(o)';
+		      e.target.value = e.target.dataset.answer + '(o)';
 		  }
 		  else {
 		      e.target.value = e.target.value + '(x)';
