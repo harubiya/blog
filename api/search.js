@@ -18,7 +18,7 @@ const PORT = 3000;
 
 // 특정 출처만 허용하려면 아래와 같이 옵션을 설정합니다.
 const corsOptions = {
-    origin: 'http://gilai.net:2025', 
+    origin: 'http://gilai.net:2026', 
     optionsSuccessStatus: 200 // 일부 레거시 브라우저 지원을 위해
 };
 app.use(cors(corsOptions));
