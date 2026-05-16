@@ -1,0 +1,23 @@
+[sshd]
+enabled = true
+port    = 20022
+filter  = sshd
+#logpath = /var/log/auth.log
+backend = systemd
+#journalmatch = _SYSTEMD_UNIT=ssh.service
+# 30초 동안 3번 실패 시 차단
+maxretry = 3
+# 관찰 시간 (이 시간 동안 5번 실패하면 차단)
+findtime = 300
+# 차단 시간 (초 단위, -1은 영구 차단)
+bantime  = -1
+# 본인 IP가 차단되지 않도록 예외 등록 (선택)
+ignoreip = 127.0.0.1/8 ::1 192.168.201.0/24
+
+[postfix]
+enabled = true
+port    = smtp,465,submission
+backend = systemd
+maxretry = 3
+findtime = 300
+bantime = -1
