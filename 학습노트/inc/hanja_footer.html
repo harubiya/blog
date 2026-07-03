@@ -94,7 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'twdic':
 		url = `https://dict.revised.moe.edu.tw/search.jsp?md=1&sound=1&word=${encodeURIComponent(selectedText)}`;
 		break;
-
+            case 'jiten':
+		url = `https://kobun.weblio.jp/content/${encodeURIComponent(selectedText)}`;
 
 	    default:
 		break;
@@ -123,7 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
   <a href="#" target="_blank" class="context-menu-item" data-action="zdic">漢典 검색</a>
   <a href="#" target="_blank" class="context-menu-item" data-action="baike">바이두백과 검색</a>
   <!--<a href="#" target="_blank" class="context-menu-item" data-action="twdic">대만사전 검색</a>//-->
-  <a href="#" target="_blank" class="context-menu-item" data-action="mysearch">내꺼 검색</a>  
+  <a href="#" target="_blank" class="context-menu-item" data-action="mysearch">내꺼 검색</a>
+  <a href="#" target="_blank" class="context-menu-item" data-action="jiten">일본古語辞典 검색</a>  
   <!--<a href="#" target="_blank" class="context-menu-item" data-action="youdao">중영사전 검색</a>//-->
   <a href="#" target="_blank" class="context-menu-item" data-action="zi-tools">zi.tools</a>
   <a href="#" target="_blank" class="context-menu-item" data-action="baidu">바이두사전(간체)</a>
