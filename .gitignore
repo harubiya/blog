@@ -10,4 +10,5 @@ mysearch/
 *.jpg
 *.gif
 *.jpeg
+*.png
 .htpasswd
