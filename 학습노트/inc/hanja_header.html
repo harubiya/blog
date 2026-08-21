@@ -107,7 +107,7 @@
 	  var contentElements = document.getElementsByClassName("wrap");
 	  
 	  const quote_regex = /\[\[([^\]]+)\]\]/g;
-	  const hanja_regex = /\=([\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FFF\/～\，\。\？\！\、]+)\s*([^=]*)\=/g;
+	  const hanja_regex = /\=([\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FFF𬪩\/～\，\。\？\！\、]+)\s*([^=]*)\=/g;
 	  const blank_regex = /\[input\s([\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FFF\/～\，\。\？\！\、]+)\s*([^=]*)\]/g;
 	  const audio_regex = /audio_([^\.]+\.mp3)/g;
 	  const ai_regex = /\[(dp|ch|ge|deepseek|chatgpt|gemini)(.*?)(dp|ch|ge)\]/g;
@@ -145,7 +145,7 @@
 
 	      for (const ch of a) {
 		  // 한자 유니코드 범위: \u4e00 - \u9fff
-		  if (/[\u4e00-\u9fff]/.test(ch)) {
+		  if (/[\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FFF𬪩]/.test(ch)) {
 		      const py = pinyins[pinyinIndex++] || '';
 		      result += `<ruby><b class='hanja'>${ch}</b><rt class='hidden-rt'>${py}</rt></ruby>`;
 		  } else {
